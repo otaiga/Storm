@@ -4,7 +4,7 @@ class MainController < ApplicationController
  SECRET = ENV['SECRET']
 
  API_URL = "http://api.face.com/faces/"
- url = "http://dev.spuggy.co.uk/hackspy/upload/"
+ URL = "http://dev.spuggy.co.uk/hackspy/upload/"
 
 
   def index
@@ -22,7 +22,7 @@ class MainController < ApplicationController
   	#http://localhost:3000/main/recognise?name=dicky.jpg   <- request needed
   	name = params[:name]
   	client = Face.get_client(:api_key => KEY, :api_secret => SECRET)
-    data = client.faces_detect(:urls => [url+name])
+    data = client.faces_detect(:urls => [URL+name])
     smiling = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["value"]
     confidence = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["confidence"]
 
