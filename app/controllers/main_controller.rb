@@ -33,7 +33,6 @@ class MainController < ApplicationController
     end
 
     respond_to do |format|
-      format.xml { render :xml => @all.to_xml }
       format.html { render :json => @all.to_json }
       format.json { render :json => @all.to_json }
     end
