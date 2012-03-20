@@ -38,12 +38,22 @@ class MainController < ApplicationController
   	client = Face.get_client(:api_key => KEY, :api_secret => SECRET)
     data = client.faces_detect(:urls => [URL+name])
 
-    unless data.to_hash["photos"][0]["tags"] == []
-       smiling = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["value"]
-       confidence = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["confidence"]
-      @all = ["Smiling?" => smiling, "Confidence?" => confidence]
+    p data.to_hash["photos"][0]["tags"][0] 
+    if data.to_hash["photos"][0]["tags"] != nil
+
+      unless data.to_hash["photos"][0]["tags"][1] == nil
+      	p data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["value"]
+        smiling = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["value"]
+        confidence = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["confidence"] 
+        @all = ["Smiling?" => smiling, "Confidence?" => confidence]
+      else
+      	p data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["value"]
+        smiling = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["value"]	
+        confidence = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["confidence"] 
+        @all = ["Smiling?" => smiling, "Confidence?" => confidence]
+      end
     else
-      @all = "Sorry, something went wrong"
+      @all = "Something went wrong"
     end
 
     respond_to do |format|
