@@ -1,7 +1,7 @@
 class MainController < ApplicationController
 
- KEY = ""
- SECRET = ""	
+ KEY = ENV['KEY']
+ SECRET = ENV['SECRET']
 
  API_URL = "http://api.face.com/faces/"
 
