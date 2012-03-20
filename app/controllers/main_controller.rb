@@ -38,25 +38,23 @@ class MainController < ApplicationController
   	client = Face.get_client(:api_key => KEY, :api_secret => SECRET)
     data = client.faces_detect(:urls => [URL+name])
 
-    if data.to_hash["photos"][0]["tags"] != nil
+    # if data.to_hash["photos"][0]["tags"] != nil
 
-      unless data.to_hash["photos"][0]["tags"][1] == nil
-        smiling = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["value"]
-        confidence = data.to_hash["photos"][0]["tags"][1]["attributes"]["smiling"]["confidence"] 
-        @all = ["Smiling?" => smiling, "Confidence?" => confidence]
-      else
-        smiling = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["value"]	
-        confidence = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["confidence"] 
-        @all = ["Smiling?" => smiling, "Confidence?" => confidence]
-      end
-    else
-      @all = "Something went wrong"
-    end
+    #   unless data.to_hash["photos"][0]["tags"][0] == nil
+    #     smiling = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["value"]
+    #     confidence = data.to_hash["photos"][0]["tags"][0]["attributes"]["smiling"]["confidence"] 
+    #     @all = ["Smiling?" => smiling, "Confidence?" => confidence]
+    #   else
+    #     @all = "Something went wrong"
+    #   end
+    # else
+    	@all = data.to_hash
+    # end
 
     respond_to do |format|
       format.html { render :json => @all.to_json }
       format.json { render :json => @all.to_json }
-    end
+     end
 
   end
 
