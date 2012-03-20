@@ -7,7 +7,8 @@ gem 'rails', '3.1.1'
 
 gem 'sqlite3'
 gem 'httparty'
-gem "face"
+gem 'face'
+gem 'therubyracer'
 gem 'json'
 
 # Gems used only for assets and not required
