@@ -36,7 +36,7 @@ class MainController < ApplicationController
   	#http://localhost:3000/main/recognise?name=dicky.jpg   <- request needed
   	name = params[:name]
   	client = Face.get_client(:api_key => KEY, :api_secret => SECRET)
-    data = client.faces_detect(:urls => [URL+name])
+    data = client.faces_detect(:urls => [URL+name], :attributes => "all")
 
     # if data.to_hash["photos"][0]["tags"] != nil
 
