@@ -1,7 +1,8 @@
 Storm::Application.routes.draw do
   get "main/index"
-
   get "main/recognise"
+  get "main/add"
+  get "main/remove"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
